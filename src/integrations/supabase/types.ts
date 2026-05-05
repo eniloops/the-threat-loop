@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      intel_items: {
+        Row: {
+          created_at: string
+          headline: string
+          id: string
+          language: string
+          published_at: string
+          region: string
+          sector: string
+          source_name: string
+          source_url: string
+          summary: string
+          threat_type: string
+        }
+        Insert: {
+          created_at?: string
+          headline: string
+          id?: string
+          language?: string
+          published_at?: string
+          region: string
+          sector: string
+          source_name: string
+          source_url: string
+          summary: string
+          threat_type: string
+        }
+        Update: {
+          created_at?: string
+          headline?: string
+          id?: string
+          language?: string
+          published_at?: string
+          region?: string
+          sector?: string
+          source_name?: string
+          source_url?: string
+          summary?: string
+          threat_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
