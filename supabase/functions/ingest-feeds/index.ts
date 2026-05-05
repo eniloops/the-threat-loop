@@ -53,7 +53,7 @@ const FEEDS: { url: string; lang: "en" | "es" }[] = [
 ];
 
 const MAX_PER_FEED = 5;
-const ANTHROPIC_MODEL = "claude-sonnet-4-20250514";
+const ANTHROPIC_MODEL = "claude-sonnet-4-5-20250929";
 
 interface RssItem {
   headline: string;
