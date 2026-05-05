@@ -1,21 +1,22 @@
 import { useMemo, useState } from "react";
 import { FilterBar, defaultFilters, type Filters } from "@/components/FilterBar";
 import { IntelCard } from "@/components/IntelCard";
-import { intel } from "@/data/intel";
+import { useIntel } from "@/hooks/useIntel";
 
 const Index = () => {
   const [filters, setFilters] = useState<Filters>(defaultFilters);
+  const { data: items = [], isLoading, error } = useIntel();
 
   const filtered = useMemo(() => {
     const cutoff = Date.now() - filters.rangeDays * 24 * 60 * 60 * 1000;
-    return intel.filter((i) => {
+    return items.filter((i) => {
       if (filters.region !== "All" && i.region !== filters.region) return false;
       if (filters.sector !== "All" && i.sector !== filters.sector) return false;
       if (filters.threat !== "All" && i.threat !== filters.threat) return false;
       if (new Date(i.date).getTime() < cutoff) return false;
       return true;
     });
-  }, [filters]);
+  }, [filters, items]);
 
   return (
     <div className="container py-8 md:py-12 space-y-8">
@@ -36,11 +37,21 @@ const Index = () => {
             Intel Feed
           </h2>
           <span className="text-xs text-primary-glow/50">
-            {filtered.length} / {intel.length} items
+            {isLoading ? "loading…" : `${filtered.length} / ${items.length} items`}
           </span>
         </div>
 
-        {filtered.length === 0 ? (
+        {error ? (
+          <div className="glass-card p-10 text-center text-destructive-foreground">
+            Failed to load intel. {(error as Error).message}
+          </div>
+        ) : isLoading ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="glass-card h-48 animate-pulse" />
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="glass-card p-10 text-center text-muted-foreground">
             No intel matches the current filters.
           </div>
