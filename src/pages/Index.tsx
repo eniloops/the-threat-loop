@@ -24,7 +24,7 @@ const Index = () => {
           THE LOOP
         </h1>
         <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-primary-glow/60">
-          // personal threat intelligence
+          // signal in. noise out.
         </p>
       </section>
 
