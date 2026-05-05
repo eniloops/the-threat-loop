@@ -1,37 +1,52 @@
 const About = () => {
   return (
-    <div className="container py-8 md:py-12 max-w-3xl space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-2xl md:text-3xl font-bold tracking-[0.2em] violet-glow">
-          ABOUT THE LOOP
+    <div className="container py-10 md:py-16 max-w-2xl space-y-8 font-mono">
+      <header className="space-y-3 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-[0.25em] violet-glow">
+          THE LOOP
         </h1>
-        <p className="text-xs uppercase tracking-[0.25em] text-primary-glow/60">
-          // signal over noise
+        <p className="italic text-xs md:text-sm text-primary-glow/70">
+          A personal threat intelligence feed built for the curious, the vigilant, and the bilingual.
         </p>
       </header>
 
-      <article className="glass-card p-6 md:p-8 space-y-4 leading-relaxed text-sm md:text-base text-foreground/90">
+      <article className="glass-card p-6 md:p-8 space-y-5 leading-relaxed text-sm md:text-base text-foreground/75">
+        <p>The Loop started as a memory.</p>
         <p>
-          <span className="text-primary-glow">The Loop</span> is a personal
-          threat intelligence dashboard. It collapses noisy feeds, advisories
-          and breach reports into a single, focused stream you can actually
-          read.
+          Back in my Deloitte days, another analyst and I would spend hours every month manually
+          curating a threat landscape report for clients. Scanning headlines, categorizing
+          incidents by region and sector, translating context across languages. It was tedious,
+          important work.
         </p>
         <p>
-          Filter intel by region, sector, threat type and time range. Pivot to
-          the global map to see where activity is concentrated. When you have a
-          question, ask the resident agent — it pulls from the same feed and
-          answers in plain language.
+          I needed something personal. Something that fed my own curiosity. Working in threat
+          intelligence makes you want to know more, see more, understand more.
         </p>
-        <p className="text-muted-foreground">
-          v0.1 ships with curated sample intel so the layout looks real from
-          day one. Live ingestion, your own sources, and persistent history are
-          on the roadmap.
+        <p>So I built The Loop.</p>
+        <p>
+          It pulls from 40+ sources in English and Spanish, tags every article by region, sector,
+          and threat type, and has a bilingual AI agent you can ask anything.
         </p>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-primary-glow/50 pt-2">
-          // built for analysts, founders, and the perpetually paranoid.
-        </p>
+        <p>It’s personal. It prioritizes Latin America because most tools don’t.</p>
+        <p>And it’s mine.</p>
       </article>
+
+      <footer className="text-center text-[11px] tracking-[0.15em] text-muted-foreground/70 space-y-1 pt-2">
+        <p>Built by Enida Casanova Mendez</p>
+        <p>Redmond, WA</p>
+        <p>
+          <a
+            href="https://eniloops.github.io"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-primary-glow transition-colors"
+          >
+            eniloops.github.io
+          </a>
+          <span className="mx-2 text-primary-glow/40">·</span>
+          <span className="text-primary-glow/70">#EniInTheLoop</span>
+        </p>
+      </footer>
     </div>
   );
 };
