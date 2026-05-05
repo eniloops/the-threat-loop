@@ -40,6 +40,15 @@ const FEEDS: { url: string; lang: "en" | "es" }[] = [
   { url: "https://research.checkpoint.com/feed/", lang: "en" },
   { url: "https://securelist.com/feed/", lang: "en" },
   { url: "https://blog.google/threat-analysis-group/rss/", lang: "en" },
+  // Microsoft security
+  { url: "https://www.microsoft.com/en-us/security/blog/feed/", lang: "en" },
+  { url: "https://msrc.microsoft.com/blog/rss/", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=DefenderThreatIntelligence", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=MicrosoftSentinelBlog", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=MicrosoftDefenderATPBlog", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=Vulnerability-Management", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=DefenderExternalAttackSurfaceMgmtBlog", lang: "en" },
+  { url: "https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=MicrosoftSecurityExperts", lang: "en" },
   // Spanish
   { url: "https://www.welivesecurity.com/es/feed/", lang: "es" },
   { url: "https://unaaldia.hispasec.com/feeds/posts/default", lang: "es" },
