@@ -41,7 +41,12 @@ async function scrapeArticles() {
     try {
       const block = match[1];
       const title = pick(block, "title");
-      const url = pick(block, "link");
+      let url = pick(block, "link");
+      // Fallback: try href= attribute when content is empty or not a valid URL
+      if (!url || !/^https?:/i.test(url)) {
+        const hrefMatch = block.match(/<link[^>]*href=["']([^"']+)["']/i);
+        if (hrefMatch) url = hrefMatch[1];
+      }
       const pubDate = pick(block, "pubDate");
       if (!title || !url) {
         console.warn("[scrape] skipping item missing title/url");
