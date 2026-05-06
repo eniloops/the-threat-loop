@@ -96,8 +96,8 @@ function pickTag(block: string, tag: string): string | null {
 function parseRss(xml: string): RssItem[] {
   const items: RssItem[] = [];
   // RSS 2.0 <item>
-  const itemRegex = /<item[\s>][\s\S]*?<\/item>/gi;
-  const entryRegex = /<entry[\s>][\s\S]*?<\/entry>/gi;
+  const itemRegex = /<item\b[\s\S]*?<\/item>/gi;
+  const entryRegex = /<entry\b[\s\S]*?<\/entry>/gi;
   const blocks = [
     ...(xml.match(itemRegex) || []),
     ...(xml.match(entryRegex) || []),
@@ -105,7 +105,8 @@ function parseRss(xml: string): RssItem[] {
   for (const block of blocks) {
     const title = pickTag(block, "title");
     let link = pickTag(block, "link");
-    if (link && /<link[^>]*href=/i.test(block) && !/^https?:/i.test(decodeEntities(link).trim())) {
+    // Fallback: try href= attribute when content is null or not a valid URL
+    if (!link || !/^https?:/i.test(decodeEntities(link).trim())) {
       const m = block.match(/<link[^>]*href=["']([^"']+)["']/i);
       if (m) link = m[1];
     }
