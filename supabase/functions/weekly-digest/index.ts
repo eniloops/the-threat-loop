@@ -9,13 +9,31 @@ const YOUR_EMAIL = "eniccm@gmail.com";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function scrapeArticles() {
-  const res = await fetch("https://www.microsoft.com/en-us/security/blog/topic/actionable-threat-insights/");
-  const html = await res.text();
-  const articles = [];
-  const regex = /<a[^>]+href="(https:\/\/www\.microsoft\.com\/en-us\/security\/blog\/\d{4}\/[^"]+)"[^>]*>([^<]+)<\/a>/g;
+  const res = await fetch(
+    "https://www.microsoft.com/en-us/security/blog/topic/actionable-threat-insights/feed/",
+    { headers: { "User-Agent": "Mozilla/5.0 TheLoopBot/1.0" } }
+  );
+  const xml = await res.text();
+  const articles: { url: string; title: string; pubDate: string }[] = [];
+  const itemRegex = /<item\b[^>]*>([\s\S]*?)<\/item>/g;
+  const pick = (block: string, tag: string) => {
+    const re = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i");
+    const m = block.match(re);
+    if (!m) return "";
+    return m[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1").trim();
+  };
+
+  const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
   let match;
-  while ((match = regex.exec(html)) !== null) {
-    articles.push({ url: match[1], title: match[2].trim() });
+  while ((match = itemRegex.exec(xml)) !== null) {
+    const block = match[1];
+    const title = pick(block, "title");
+    const url = pick(block, "link");
+    const pubDate = pick(block, "pubDate");
+    if (!title || !url) continue;
+    const ts = pubDate ? Date.parse(pubDate) : NaN;
+    if (!isNaN(ts) && ts < cutoff) continue;
+    articles.push({ url, title, pubDate });
   }
   return [...new Map(articles.map(a => [a.url, a])).values()].slice(0, 5);
 }
