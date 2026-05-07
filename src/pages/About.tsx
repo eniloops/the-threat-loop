@@ -15,10 +15,7 @@ const About = () => {
           incidents by region and sector, translating context across languages. It was tedious,
           important work.
         </p>
-        <p>
-          I needed something personal. Something that fed my own curiosity. Working in threat
-          intelligence makes you want to know more, see more, understand more.
-        </p>
+        <p>Now, everything can be automatized.</p>
         <p>So I built The Loop.</p>
         <p>
           It pulls from 40+ sources in English and Spanish, tags every article by region, sector,
