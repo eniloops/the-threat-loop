@@ -26,6 +26,10 @@ async function scrapeArticles() {
       console.error(`[scrape] non-OK status ${res.status}`);
       return [];
     }
+    if (!xml.includes("<rss") && !xml.includes("<channel")) {
+      console.error("[scrape] response is not RSS XML — likely blocked. Preview:", xml.substring(0, 200));
+      return [];
+    }
   } catch (err) {
     console.error("[scrape] fetch failed:", (err as Error).message);
     return [];
