@@ -5,9 +5,6 @@ const About = () => {
         <h1 className="text-4xl md:text-6xl font-bold tracking-[0.25em] violet-glow">
           THE LOOP
         </h1>
-        <p className="italic text-xs md:text-sm text-primary-glow/70">
-          A personal threat intelligence feed built for the curious, the vigilant, and the bilingual.
-        </p>
       </header>
 
       <article className="glass-card p-6 md:p-8 space-y-5 leading-relaxed text-sm md:text-base text-foreground/75">
@@ -27,13 +24,10 @@ const About = () => {
           It pulls from 40+ sources in English and Spanish, tags every article by region, sector,
           and threat type, and has a bilingual AI agent you can ask anything.
         </p>
-        <p>It’s personal. It prioritizes Latin America because most tools don’t.</p>
-        <p>And it’s mine.</p>
       </article>
 
       <footer className="text-center text-[11px] tracking-[0.15em] text-muted-foreground/70 space-y-1 pt-2">
         <p>Built by Enida Casanova Mendez</p>
-        <p>Redmond, WA</p>
         <p>
           <a
             href="https://eniloops.github.io"
