@@ -13,12 +13,21 @@ async function scrapeArticles() {
   console.log(`[scrape] fetching RSS: ${feedUrl}`);
   let xml = "";
   try {
-    const res = await fetch(feedUrl, { headers: { "User-Agent": "Mozilla/5.0 TheLoopBot/1.0" } });
+    const res = await fetch(feedUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
+      },
+    });
     console.log(`[scrape] status: ${res.status}`);
     xml = await res.text();
     console.log(`[scrape] body length: ${xml.length}, preview: ${xml.substring(0, 300)}`);
     if (!res.ok) {
       console.error(`[scrape] non-OK status ${res.status}`);
+      return [];
+    }
+    if (!xml.includes("<rss") && !xml.includes("<channel")) {
+      console.error("[scrape] response is not RSS XML — likely blocked. Preview:", xml.substring(0, 200));
       return [];
     }
   } catch (err) {
@@ -112,7 +121,7 @@ async function generateWhyItMatters(title: string, similar: any[]) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-sonnet-4-5",
         max_tokens: 1000,
         messages: [{
           role: "user",
